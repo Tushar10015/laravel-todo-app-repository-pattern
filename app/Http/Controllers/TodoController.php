@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendTodoNotification;
 use App\Services\TodoService;
 use Illuminate\Http\Request;
 
@@ -55,7 +56,10 @@ class TodoController extends Controller
         ]);
 
         $data['user_id'] = auth()->id();
-        $this->service->createTodo($data);
+        $todo = $this->service->createTodo($data);
+
+        // Dispatch the job to send a notification that a todo was created
+        SendTodoNotification::dispatch($todo, 'created');
 
         return redirect()->route('todos.index')->with('success', 'Todo created successfully!');
     }
@@ -101,7 +105,10 @@ class TodoController extends Controller
         $data['is_completed'] = $data['is_completed'] ?? 0;
 
         $data['user_id'] = auth()->id();
-        $this->service->updateTodo($id, $data);
+        $todo = $this->service->updateTodo($id, $data);
+
+        // Dispatch the job to send a notification that a todo was updated
+        SendTodoNotification::dispatch($todo, 'updated');
 
         return redirect()->route('todos.index')->with('success', 'Todo updated successfully!');
     }

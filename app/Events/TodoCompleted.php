@@ -10,6 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Todo;
+use Illuminate\Support\Facades\Log;
 
 class TodoCompleted
 {
@@ -20,6 +21,7 @@ class TodoCompleted
      */
     public function __construct(Todo $todo)
     {
+        Log::info('Todo completed event constructor');
         $this->todo = $todo;
     }
 

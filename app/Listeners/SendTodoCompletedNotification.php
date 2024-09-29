@@ -26,6 +26,7 @@ class SendTodoCompletedNotification implements ShouldQueue
      */
     public function handle(TodoCompleted $event): void
     {
+        Log::info('Sending todo completed notification');
         // Example: Send an email notification
         Mail::to($event->todo->user->email)->send(new TodoCompletedMail($event->todo));
 
