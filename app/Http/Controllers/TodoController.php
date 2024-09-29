@@ -98,6 +98,8 @@ class TodoController extends Controller
             'description' => 'nullable|string',
             'is_completed' => 'boolean',
         ]);
+        $data['is_completed'] = $data['is_completed'] ?? 0;
+
         $data['user_id'] = auth()->id();
         $this->service->updateTodo($id, $data);
 

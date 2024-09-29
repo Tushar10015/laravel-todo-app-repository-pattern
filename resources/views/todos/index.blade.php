@@ -13,6 +13,7 @@
                         <h2 class="text-lg font-semibold">{{ $todo->title }}</h2>
                         <p class="text-gray-500">{{ $todo->description }}</p>
                     </div>
+                    <div class="border-l border-gray-300 h-16 mx-4"></div>
                     <div class="flex space-x-2">
                         <a href="{{ route('todos.show', $todo->id) }}" class="text-blue-500 hover:underline">View</a>
                         <a href="{{ route('todos.edit', $todo->id) }}" class="text-yellow-500 hover:underline">Edit</a>

@@ -17,7 +17,7 @@ class TodoRepository implements TodoRepositoryInterface
 
     public function all()
     {
-        return $this->model->all();
+        return $this->model->orderBy('id', 'desc')->get();
     }
 
     public function find($id)
