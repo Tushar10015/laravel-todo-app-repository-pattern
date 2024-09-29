@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\TodoCompleted;
+use App\Listeners\SendTodoCompletedNotification;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(TodoCompleted::class, SendTodoCompletedNotification::class);
     }
 
     /**
