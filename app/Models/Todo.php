@@ -56,7 +56,7 @@ class Todo extends Model
     public static function boot()
     {
         parent::boot();
-        Log::info('Todo model booted');
+        //Log::info('Todo model booted');
         static::updated(function ($todo) {
             if ($todo->is_completed) {
                 Log::info('Todo completed event dispatched');
